@@ -28,6 +28,10 @@ const ColorList = ({ colors, updateColors }) => {
         .then(res => {
           console.log('res in saveEdit', res)
           // updateColors(res.data)
+          //since we got back the data as the specific edited color, I really don't know how should I deal with this,
+          //it's not like a list of colors to update the state
+          //also it's working to edit so I think it's fine
+          //just curious how the serve is designed in this way, is this another way to do it
           
         })
         .catch(err => console.log(err.response))
@@ -42,7 +46,11 @@ const ColorList = ({ colors, updateColors }) => {
               Authorization: localStorage.getItem('token')}
       })
         .then(res => {
-          console.log('id got from deleteColor', res.data)
+          console.log('data from deleteColor', res)
+          //since we got back the data as an id, I really don't know how should I deal with this id,
+          //it's not like a list of colors to update the state
+          //also it's working to delete so I think it's fine
+          //just curious how the serve is designed in this way, is this another way to do it
         })
         .catch(err => console.log(err.response))
   };
