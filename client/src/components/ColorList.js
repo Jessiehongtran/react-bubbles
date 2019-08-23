@@ -27,7 +27,8 @@ const ColorList = ({ colors, updateColors }) => {
       })
         .then(res => {
           console.log('res in saveEdit', res)
-          console.log('fn', updateColors)
+          // updateColors(res.data)
+          
         })
         .catch(err => console.log(err.response))
     
@@ -45,6 +46,19 @@ const ColorList = ({ colors, updateColors }) => {
         })
         .catch(err => console.log(err.response))
   };
+
+  const addColor = color => {
+    axios
+        .post('http://localhost:5000/api/colors/', color, {
+          headers: {
+              Authorization: localStorage.getItem('token')}
+      })
+        .then(res => {
+          console.log('color to add', res)
+          updateColors(res.data)
+        })
+        .catch(err=> console.loh(err.response))
+  }
 
   return (
     <div className="colors-wrap">
@@ -96,7 +110,7 @@ const ColorList = ({ colors, updateColors }) => {
         </form>
       )}
       <div className="spacer">
-        <AddColor updateColors={updateColors}/>
+        <AddColor addColor={addColor}/>
       </div>
     </div>
   );

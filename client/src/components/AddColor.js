@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 
-const AddColor = ({updateColors}) => {
+const AddColor = ({addColor}) => {
     
-    const [newColor, setNewColor] = useState({name: '', code: ''})
+    const [newColor, setNewColor] = useState({color: '', code: ''})
     const handleChange = event => {
         setNewColor({...newColor, [event.target.name]: event.target.value})
     }
     const handleSubmit = event => {
         event.preventDefault()
         console.log(newColor)
-        updateColors(newColor)
+        addColor(newColor)
     }
 
     return (
@@ -19,7 +19,7 @@ const AddColor = ({updateColors}) => {
                     Color Name
                     <input 
                         type="text" 
-                        name="name" 
+                        name="color" 
                         value={newColor.name}
                         onChange={handleChange}
                     />
