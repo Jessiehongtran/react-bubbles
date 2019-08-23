@@ -7,7 +7,7 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  // console.log('colors', colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -18,6 +18,16 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
+    // console.log('id', colorToEdit.id)
+    axios
+        .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit, {
+          headers: {
+              Authorization: localStorage.getItem('token')}
+      })
+        .then(res => {
+          console.log('res in saveEdit', res)
+        })
+        .catch(err => console.log(err.response))
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
