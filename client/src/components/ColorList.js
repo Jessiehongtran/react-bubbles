@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { prependOnceListener } from "cluster";
 
 const initialColor = {
   color: "",
@@ -27,16 +26,23 @@ const ColorList = ({ colors, updateColors }) => {
       })
         .then(res => {
           console.log('res in saveEdit', res)
-          
+          console.log('fn', updateColors)
         })
         .catch(err => console.log(err.response))
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    console.log('color in deleteColor', color)
+    axios
+        .delete(`http://localhost:5000/api/colors/${color.id}`, {
+          headers: {
+              Authorization: localStorage.getItem('token')}
+      })
+        .then(res => {
+          console.log('id got from deleteColor', res.data)
+        })
+        .catch(err => console.log(err.response))
   };
 
   return (
