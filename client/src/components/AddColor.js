@@ -35,7 +35,7 @@ const AddColor = ({addColor}) => {
                     />
                 </label>
 
-                <button >Add</button>
+                <button className="button-add">Add</button>
             </form>
         </div>
     )
