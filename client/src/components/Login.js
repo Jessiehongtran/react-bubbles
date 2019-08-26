@@ -28,7 +28,7 @@ const Login = (props) => {
 
   return (
     <>
-      
+      <div className="login">
       <form className="login-form" onSubmit={handleSubmit}>
         <input 
         type="text" 
@@ -48,6 +48,7 @@ const Login = (props) => {
 
         <button className="login-btn" type="submit">Log In</button>
       </form>
+      </div>
     </>
   );
 };
