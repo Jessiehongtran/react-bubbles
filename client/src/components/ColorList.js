@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import AddColor from './AddColor'
 
 const initialColor = {
   color: "",
@@ -7,7 +8,7 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  // console.log('colors', colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -18,14 +19,54 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    // console.log('id', colorToEdit.id)
+    axios
+        .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit, {
+          headers: {
+              Authorization: localStorage.getItem('token')}
+      })
+        .then(res => {
+          console.log('res in saveEdit', res)
+          // updateColors(res.data)
+          //since we got back the data as the specific edited color, I really don't know how should I deal with this,
+          //it's not like a list of colors to update the state
+          //also it's working to edit so I think it's fine
+          //just curious how the serve is designed in this way, is this another way to do it
+          
+        })
+        .catch(err => console.log(err.response))
+    
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    console.log('color in deleteColor', color)
+    axios
+        .delete(`http://localhost:5000/api/colors/${color.id}`, {
+          headers: {
+              Authorization: localStorage.getItem('token')}
+      })
+        .then(res => {
+          console.log('data from deleteColor', res)
+          //since we got back the data as an id, I really don't know how should I deal with this id,
+          //it's not like a list of colors to update the state
+          //also it's working to delete so I think it's fine
+          //just curious how the serve is designed in this way, is this another way to do it
+        })
+        .catch(err => console.log(err.response))
   };
+
+  const addColor = color => {
+    axios
+        .post('http://localhost:5000/api/colors/', color, {
+          headers: {
+              Authorization: localStorage.getItem('token')}
+      })
+        .then(res => {
+          console.log('color to add', res)
+          updateColors(res.data)
+        })
+        .catch(err=> console.loh(err.response))
+  }
 
   return (
     <div className="colors-wrap">
@@ -76,8 +117,9 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-      <div className="spacer" />
-      {/* stretch - build another form here to add a color */}
+      <div className="spacer">
+        <AddColor addColor={addColor}/>
+      </div>
     </div>
   );
 };

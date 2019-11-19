@@ -8,6 +8,7 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  
 }
 
 .App {
@@ -97,3 +98,48 @@ form {
     margin-top: 16px;
   }
 }
+
+.button-add {
+  border: none;
+  background-color: black;
+  color: white;
+  padding: 3px 8px;
+  margin-top: 16px;
+  width: 30%;
+  margin-left: 40px;
+}
+
+
+.login{
+  background-image: url("../src/images/colorful.jpg");
+  width: 100%;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  margin-left: 100px;
+  margin-top: 100px;
+  
+  
+  input {
+    font-family: "Montserrat", sans-serif;
+    margin: 10px;
+    width: 30%;
+    font-size: 18px;
+  }
+
+  .login-btn {
+    border: none;
+    background-color: black;
+    color: white;
+    padding: 3px 8px;
+    margin-top: 16px;
+    width: 10%;
+    font-size: 18px;
+  }
+  
+}
+
+
